@@ -1,17 +1,20 @@
-//
-//  OnBorderApp.swift
-//  OnBorder
-//
-//  Created by David and Cristina on 7/29/23.
-//
-
 import SwiftUI
 
 @main
 struct OnBorderApp: App {
+    let screenRepository = ScreenRepository()
+    @State var isOnboarding: Bool = true
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isOnboarding {
+                OnboardingScreen(viewModel: .init(
+                    screenRepository: screenRepository,
+                    isOnboarding: $isOnboarding
+                ))
+            } else {
+                ContentView()
+            }
         }
     }
 }
